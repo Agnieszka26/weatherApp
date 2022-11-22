@@ -1,0 +1,18 @@
+.button {
+  background-color: rgb(48, 36, 221);
+  // &.hasColor-red {
+  //   background-color: red;
+  // } to samo co na dole, tylko to na dole jest bardziej reużywalne
+
+  &.hasColor {
+    &-red {
+      background-color: red;
+    }
+    &-green {
+      background-color: green;
+    }
+    &-thistle {
+      background-color: thistle;
+    }
+  }
+}

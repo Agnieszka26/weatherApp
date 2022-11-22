@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Buttons from "./components/Buttons/Buttons";
+import Users from "./components/Users/Users";
+import axios from "axios";
+import {FormEvent, useEffect, useState} from "react";
+import Input from "./components/Input/Input";
 
 function App() {
+  const [result, setResults] = useState([]);
+  async function getUsers() {
+    try {
+      const response = await axios.get("https://randomuser.me/api/?results=5");
+      setResults(response.data.results);//to musi byc otypowane i usestate tez - tablica czego 
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Buttons />
+      <Input handleChange={function (event: FormEvent<HTMLInputElement>): void {
+        throw new Error("Function not implemented.");
+      } } value={""} />
+      <Users users={result} />
+    </>
   );
 }
 
