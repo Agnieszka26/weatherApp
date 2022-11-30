@@ -1,25 +1,31 @@
 import {FunctionComponent} from "react";
-import User from "../Users/Users";
-import UserProps from "../User/user";
-
-interface UsersProps { 
-  users:any ;
+import User from "../User/User";
+import {UserDate} from "../User/userModel";
+import style from "./Users.module.scss";
+interface UsersProps {
+  users: UserDate[];
 }
 
 const Users: FunctionComponent<UsersProps> = ({users}) => {
-  console.log(users);
   return (
     <>
-      {users?.map((user) => {
-        return (
-          <User
-            firstName={user?.name?.first}
-            lastName={user?.name?.last}
-            picture={user?.picture?.medium}
-            email={user?.email}
-          />
-        );
-      })}
+      <div className={style.cardContainer}>
+        {users?.map((user) => {
+          const {email, name} = user;
+          const large = user.picture?.large;
+
+          return (
+            <User
+              key={user.id?.value}
+              name={name}
+              picture={{
+                large,
+              }}
+              email={email}
+            />
+          );
+        })}
+      </div>
     </>
   );
 };

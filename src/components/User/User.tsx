@@ -1,28 +1,22 @@
 import {FunctionComponent} from "react";
 import "./User.module.scss";
-// import UserProps from "../User/user";
-import React from "react";
+import {UserProps} from "../User/userModel";
 
-interface UserProps {
-  firstName: string;
-  lastName: string;
-  picture: string;
-  email: string;
-}
+import styles from "./User.module.scss";
 
-const User: FunctionComponent<UserProps> = ({
-  firstName,
-  lastName,
-  picture,
-  email,
-}) => {
+const User: FunctionComponent<UserProps> = ({picture, email, name}) => {
   return (
-    <div className="card">
-      <img src={picture} alt={firstName} className="image" />
-      <div className="container">
+
+    <div className={styles.card}>
+      <img
+        src={picture?.large}
+        alt={picture?.large}
+        className={styles.image}
+      />
+      <div className={styles.container}>
         <h4>
           <b>
-            {firstName} {lastName}
+            {name?.first} {name?.last}
           </b>
         </h4>
         <p>{email}</p>
